@@ -16,12 +16,12 @@ public static class Program
         do
         {
             Console.WriteLine("\n--- МЕНЮ ---");
-            Console.WriteLine("1. Створити структури даних (масив та список)");
+            Console.WriteLine("1. Створити структури даних");
             Console.WriteLine("2. Задати елемент пошуку");
-            Console.WriteLine("3. Пошук перебором (Масив vs Список)");
-            Console.WriteLine("4. Пошук з бар'єром (Масив)");
-            Console.WriteLine("5. Бінарний пошук (Масив)");
-            Console.WriteLine("6. Пошук золотого перерізу (Масив)");
+            Console.WriteLine("3. Пошук перебором)");
+            Console.WriteLine("4. Пошук з бар'єром");
+            Console.WriteLine("5. Бінарний пошук");
+            Console.WriteLine("6. Пошук золотого перерізу");
             Console.WriteLine("0. Вихід");
             Console.Write("Виберіть опцію: ");
 
@@ -124,3 +124,4 @@ public static class Program
         return -1;
     }
 }
+
