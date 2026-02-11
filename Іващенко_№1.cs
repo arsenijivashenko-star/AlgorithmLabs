@@ -4,7 +4,6 @@ using System.Text;
 public static class Program
 {
     private static int[] array;
-    private static LinkedList<int> linkedList;
     private static int target;
     private static int size;
 
@@ -42,7 +41,6 @@ public static class Program
                     break;
                 case 3:
                     MeasureExecution("Лінійний (Масив)", () => LinearSearchArray(array, target));
-                    MeasureExecution("Лінійний (Список)", () => LinearSearchList(linkedList, target));
                     break;
                 case 4:
                     MeasureExecution("З бар'єром (Масив)", () => SentinelSearch(array, target));
@@ -64,7 +62,6 @@ public static class Program
         Random rand = new Random();
         array = new int[n];
         for (int i = 0; i < n; i++) array[i] = rand.Next(0, n * 2);
-        linkedList = new LinkedList<int>(array);
         Console.WriteLine($"Згенеровано {n} елементів.");
     }
 
@@ -81,17 +78,6 @@ public static class Program
     {
         for (int i = 0; i < data.Length; i++)
             if (data[i] == key) return i;
-        return -1;
-    }
-
-    private static int LinearSearchList(LinkedList<int> data, int key)
-    {
-        int index = 0;
-        foreach (var item in data)
-        {
-            if (item == key) return index;
-            index++;
-        }
         return -1;
     }
 
