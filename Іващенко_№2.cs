@@ -4,9 +4,6 @@ using System.Transactions;
 
 public static class Program
 {
-    private static int[] array2 = { 6, 0, 2, 0, 1, 3, 4, 6, 1, 3, 2 };
-    private static string[] array3 = { "COW", "DOG", "SEA", "RUG", "ROW", "MOB", "BOX", "TAB", "BAR", "EAR", "TAR", "DIG", "BIG", "TEA", "NOW", "FOX" };
-    private static double[] array4 = { 0.79, 0.13, 0.16, 0.64, 0.39, 0.20, 0.89, 0.53, 0.71, 0.42 };
     private static Random rand = new Random();
 
     public static void Main(string[] args)
@@ -203,3 +200,4 @@ public static class Program
         A[j] = temp;
     }
 }
+
