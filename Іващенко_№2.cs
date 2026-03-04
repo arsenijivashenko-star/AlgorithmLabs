@@ -51,7 +51,7 @@ public static class Program
                     break;
                 case 4:
                     string[] array4 = { "COW", "DOG", "SEA", "RUG", "ROW", "MOB", "BOX", "TAB", "BAR", "EAR", "TAR", "DIG", "BIG", "TEA", "NOW", "FOX" };
-                    MeasureExecution("Radix Sort", () => RadixSortWords(array4, 15));
+                    MeasureExecution("Radix Sort", () => RadixSortWords(array4, 3));
                     foreach (string i in array4)
                         Console.Write(i + ", ");
                     Console.Write("\n");
@@ -200,4 +200,3 @@ public static class Program
         A[j] = temp;
     }
 }
-
