@@ -20,7 +20,7 @@ public static class Program
             Console.WriteLine("1. Ввести рядок");
             Console.WriteLine("2. Ввести підрядок");
             Console.WriteLine("3. Прямий пошук");
-            Console.WriteLine("4. КМП пошук");
+            Console.WriteLine("4. КПМ пошук");
             Console.WriteLine("0. Вихід");
             Console.Write("Виберіть опцію: ");
 
@@ -35,10 +35,13 @@ public static class Program
                     break;
                 case 2:
                     Console.WriteLine("Введіть підрядок:");
-                    words = Console.ReadLine() ?? "";
+                    subWords = Console.ReadLine() ?? ""; // FIXED: was overwriting 'words'
                     break;
                 case 3:
                     Console.WriteLine("Індекс початку підрядку у рядку: " + MeasureExecution("Прямий пошук", () => NormalSearch(words, subWords)).ToString());
+                    break;
+                case 4:
+                    Console.WriteLine("Індекс початку підрядку у рядку: " + MeasureExecution("КПМ пошук", () => KMPSearch(words, subWords)).ToString());
                     break;
 
             }
@@ -56,22 +59,28 @@ public static class Program
 
     // --- АЛГОРИТМИ ---
 
-    // 
-    private static int NormalSearch(string word, string subWord) 
+    private static int NormalSearch(string word, string subWord)
     {
-        for (int i = 0; i < word.Length - subWord.Length; i++)
+        if (string.IsNullOrEmpty(subWord) || subWord.Length > word.Length) return -1;
+
+        // FIXED: Corrected loop bounds and inner index logic
+        for (int i = 0; i <= word.Length - subWord.Length; i++)
         {
             int match = 0;
-            for (int j = 0; j < subWord.Length; i++)
+            for (int j = 0; j < subWord.Length; j++) // FIXED: increment j, not i
             {
-                if(subWord[i] == word[i + j])
+                if (subWord[j] == word[i + j]) // FIXED: use j to index subWord
                 {
                     match++;
                 }
+                else
+                {
+                    break;
+                }
             }
 
-            if (match == subWord.Length);
-                return i;
+            if (match == subWord.Length)
+                return i; // FIXED: removed semicolon that caused early return
         }
 
         return -1;
@@ -79,8 +88,10 @@ public static class Program
 
     private static int KMPSearch(string word, string subWord)
     {
+        if (string.IsNullOrEmpty(subWord)) return 0;
         int n = word.Length;
         int m = subWord.Length;
+        if (m > n) return -1;
 
         int[] lps = ComputeLPSArray(subWord);
 
@@ -126,8 +137,15 @@ public static class Program
             }
             else
             {
-                if (len != 0) len = lps[len - 1];
-                else { lps[i] = 0; i++; }
+                if (len != 0)
+                {
+                    len = lps[len - 1];
+                }
+                else
+                {
+                    lps[i] = 0;
+                    i++;
+                }
             }
         }
         return lps;
