@@ -88,7 +88,7 @@ public static class Program
         private int tail;
         private int n;
 
-        public int Count { get => (tail % n) + 1; }
+        public int Count => (tail + n - head) % n;
 
         public Deque(int size)
         {
@@ -117,7 +117,7 @@ public static class Program
 
         public void PushFront(int x)
         {
-            if (IsFull()) throw new Exception("Overflow");
+            if (IsFull()) throw new Exception("Overflow: Дек переповнений");
             head = (head == 1) ? n : head - 1;
             Q[head] = x;
             Print();
@@ -125,7 +125,7 @@ public static class Program
 
         public int PopBack()
         {
-            if (IsEmpty()) throw new Exception("Underflow");
+            if (IsEmpty()) throw new Exception("Underflow: Дек порожній");
             tail = (tail == 1) ? n : tail - 1;
             int x = Q[tail];
             Print();
@@ -134,7 +134,15 @@ public static class Program
 
         public int Peek()
         {
-            return Q[tail];
+            if (IsEmpty()) throw new Exception("Underflow: Черга порожня");
+            return Q[head];
+        }
+
+        public int PeekBack()
+        {
+            if (IsEmpty()) throw new Exception("Underflow: Дек порожній");
+            int lastIndex = (tail == 1) ? n : tail - 1;
+            return Q[lastIndex];
         }
 
         private bool IsFull() => (tail % n) + 1 == head;
@@ -267,7 +275,10 @@ public static class Program
     static void RunSetOfStacksTask()
     {
         var sos = new SetOfStacks(2);
-        sos.Push(1); sos.Push(2); sos.Push(3); sos.Push(4);
+        sos.Push(1); 
+        sos.Push(2); 
+        sos.Push(3); 
+        sos.Push(4);
         Console.WriteLine($"Видалено: {sos.Pop()}");
         Console.WriteLine($"Видалено: {sos.Pop()}");
     }
